@@ -6,7 +6,7 @@ from utils import load_api_key
 api_key = load_api_key()
 def load_channel_list(filename='channel-list.json'):
     try:
-        with open(filename, 'r', encoding='utf-16') as f:  # Specify UTF-16 encoding here
+        with open(filename, 'r', encoding='utf-16') as f:
             channels = json.load(f)
         return channels
     except FileNotFoundError:
