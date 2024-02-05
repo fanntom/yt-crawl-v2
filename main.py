@@ -10,7 +10,6 @@ def main():
     channels = load_channel_list()
     modify = 'no'
 
-    # If channels are present, show them and ask if the user wants to modify the list
     if channels:
         print("Currently saved channels:")
         for idx, channel in enumerate(channels, start=1):
@@ -22,12 +21,10 @@ def main():
             save_channel_list(channels)  # Make sure to save any modifications
     else:
         print("No channels are currently saved.")
-        # If the user wants to add channels when none are saved
         response = input("Would you like to add channels now? (yes/no): ").strip().lower()
         if response == 'yes':
             modify = 'yes'
     
-    # Proceed to ask for channels if needed or directly to year input
     if modify == 'yes':
         while True:
             url = input("Enter a YouTube channel URL (or 'no' to finish): ")
@@ -41,13 +38,11 @@ def main():
                 print("Failed to add channel.")
         save_channel_list(channels)
 
-    # Ask for the year to fetch broadcasts, if channels exist or after modification
     if channels:
         year = input("Enter a year to fetch broadcasts from: ")
         all_broadcasts = []
         for channel in channels:
             broadcasts = fetch_broadcasts(youtube, channel['id'], year)
-            # Prepare broadcast data with channel names instead of IDs
             broadcasts_with_names = [(channel['name'],) + broadcast[1:] for broadcast in broadcasts]
             all_broadcasts.extend(broadcasts_with_names)
         
